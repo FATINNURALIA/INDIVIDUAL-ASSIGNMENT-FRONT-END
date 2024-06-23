@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Planner Application</title>
+   
+</head>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+	background-image: url('planner.jpg');
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tablinks {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 0 10px;
+    border-radius: 5px;
+}
+
+.tablinks:hover {
+    background-color: #0056b3;
+}
+
+.tabcontent {
+    display: none;
+}
+
+.tabcontent.active {
+    display: block;
+}
+
+input[type="text"], input[type="date"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+li button {
+    background-color: red;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+</style>
+<body>
+    <div class="container">
+        <h1>Event Planner Application</h1>
+        <div class="tabs">
+            <button class="tablinks" onclick="openTab(event, 'Tasks')">Tasks</button>
+            <button class="tablinks" onclick="openTab(event, 'Events')">Events</button>
+        </div>
+        <div id="Tasks" class="tabcontent">
+            <h2>Tasks</h2>
+            <input type="text" id="newTask" placeholder="Enter a new task">
+            <button onclick="addTask()">Add Task</button>
+            <ul id="taskList"></ul>
+        </div>
+        <div id="Events" class="tabcontent">
+            <h2>Events</h2>
+            <input type="text" id="eventName" placeholder="Event Name">
+            <input type="date" id="eventDate">
+            <button onclick="addEvent()">Add Event</button>
+            <ul id="eventList"></ul>
+        </div>
+    </div>
+    <script>function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+document.getElementsByClassName("tablinks")[0].click();
+
+function addTask() {
+    var taskList = document.getElementById("taskList");
+    var newTask = document.getElementById("newTask").value;
+
+    if (newTask.trim() === "") return;
+
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(newTask));
+
+    var removeButton = document.createElement("button");
+    removeButton.appendChild(document.createTextNode("Remove"));
+    removeButton.onclick = function() {
+        taskList.removeChild(li);
+    };
+
+    li.appendChild(removeButton);
+    taskList.appendChild(li);
+    document.getElementById("newTask").value = "";
+}
+
+function addEvent() {
+    var eventList = document.getElementById("eventList");
+    var eventName = document.getElementById("eventName").value;
+    var eventDate = document.getElementById("eventDate").value;
+
+    if (eventName.trim() === "" || eventDate.trim() === "") return;
+
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(eventName + " (" + eventDate + ")"));
+
+    var removeButton = document.createElement("button");
+    removeButton.appendChild(document.createTextNode("Remove"));
+    removeButton.onclick = function() {
+        eventList.removeChild(li);
+    };
+
+    li.appendChild(removeButton);
+    eventList.appendChild(li);
+    document.getElementById("eventName").value = "";
+    document.getElementById("eventDate").value = "";
+}
+</script>
+</body>
+</html>

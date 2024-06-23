@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Message</title>
+    <style>
+        .modal {
+            display: block;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+			background-image: url('planner.jpg');
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: blue;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .get-started-button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .get-started-button:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <!-- Welcome Modal -->
+    <div id="welcomeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeWelcomeModal()">&times;</span>
+            <h2>Welcome to the Event Planner Application</h2>
+            <p>Manage your tasks and events efficiently!</p>
+            <button class="get-started-button" onclick="getStarted()">Get Started</button>
+        </div>
+    </div>
+    <script>
+        function getStarted() {
+            window.location.href = "index.html";
+        }
+
+        function closeWelcomeModal() {
+            var modal = document.getElementById("welcomeModal");
+            modal.style.display = "none";
+        }
+
+        window.onload = function() {
+            var modal = document.getElementById("welcomeModal");
+            modal.style.display = "block";
+        }
+    </script>
+</body>
+</html>
